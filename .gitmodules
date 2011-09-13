@@ -1,0 +1,3 @@
+[submodule "Resources/Private/PHP/Symfony/Component/Serializer"]
+	path = Resources/Private/PHP/Symfony/Component/Serializer
+	url = git://github.com/symfony/Serializer.git

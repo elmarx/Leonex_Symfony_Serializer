@@ -11,9 +11,13 @@ class Tx_LeonexSymfonySerializer_Service_JsonGetSerializerService implements t3l
 
     private $serializer;
 
+    private $normalizer;
+
     public function __construct() {
+        $this->normalizer = new \Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer();
+
         $this->serializer = new \Symfony\Component\Serializer\Serializer(
-            array(new \Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer()),
+            array($this->normalizer),
             array('json' => new \Symfony\Component\Serializer\Encoder\JsonEncoder())
         );
     }
@@ -21,6 +25,11 @@ class Tx_LeonexSymfonySerializer_Service_JsonGetSerializerService implements t3l
     public function jsonEncode($object) {
         return $this->serializer->serialize($object, 'json');
 
+    }
+
+    public function jsonDecode($data, $class) {
+        $a = $this->serializer->decode($data, 'json');
+        return $this->normalizer->denormalize($a, $class);
     }
 
 }

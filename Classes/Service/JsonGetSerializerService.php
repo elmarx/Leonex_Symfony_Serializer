@@ -27,9 +27,16 @@ class Tx_LeonexSymfonySerializer_Service_JsonGetSerializerService implements t3l
 
     }
 
-    public function jsonDecode($data, $class) {
+    public function jsonDecode($data, $class = null) {
         $a = $this->serializer->decode($data, 'json');
-        return $this->normalizer->denormalize($a, $class);
+        if(!is_null($class)) {
+            return $this->normalizer->denormalize($a, $class);
+        }
+        return $a;
+    }
+
+    public function denormalize($array, $className) {
+        return $this->normalizer->denormalize($array, $className);
     }
 
 }

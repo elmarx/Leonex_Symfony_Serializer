@@ -39,4 +39,8 @@ class Tx_LeonexSymfonySerializer_Service_JsonGetSerializerService implements t3l
         return $this->normalizer->denormalize($array, $className);
     }
 
+    public function normalize($object) {
+        return $this->normalizer->normalize($object);
+    }
+
 }
